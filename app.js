@@ -178,20 +178,14 @@
     syncAdminUi();
   });
 
-  /* ================= 提交软件（Web3Forms） ================= */
+  /* ================= 提交软件（FormSubmit → 管理员邮箱） ================= */
+  const ADMIN_EMAIL = "mengzhangj@qq.com"; // 接收提交的管理员邮箱
+
   $("submitForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const msg = $("submitMsg");
     msg.className = "form-msg";
     msg.style.display = "none";
-
-    const key = localStorage.getItem(CFG_KEY);
-    if (!key) {
-      msg.className = "form-msg err";
-      msg.textContent = "站点尚未配置提交通道，请稍后再试或联系管理员。";
-      msg.style.display = "block";
-      return;
-    }
 
     const form = e.target;
     const btn = form.querySelector("button[type=submit]");
@@ -199,12 +193,12 @@
     btn.textContent = "提交中…";
     try {
       const fd = new FormData(form);
-      fd.append("access_key", key);
-      fd.append("subject", "📦 软件站新提交：软件推荐");
-      fd.append("from_name", "精选软件站");
-      const r = await fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
+      fd.append("_subject", "📦 软件站新提交：软件推荐");
+      fd.append("_template", "table");
+      fd.append("_captcha", "false");
+      const r = await fetch("https://formsubmit.co/ajax/" + ADMIN_EMAIL, { method: "POST", body: fd });
       const j = await r.json();
-      if (j.success) {
+      if (j.success === "true" || j.success === true) {
         msg.className = "form-msg ok";
         msg.textContent = "✅ 提交成功！管理员审核通过后即会上架，感谢推荐。";
         msg.style.display = "block";
@@ -234,9 +228,6 @@
     const authed = adminAuthed;
     $("adminLogin").style.display = authed ? "none" : "";
     $("adminContent").hidden = !authed;
-    if (authed) {
-      $("cfgKey").value = localStorage.getItem(CFG_KEY) || "";
-    }
   }
 
   $("adminLoginBtn").addEventListener("click", async () => {
@@ -258,10 +249,7 @@
   });
 
   $("saveCfg").addEventListener("click", () => {
-    const key = $("cfgKey").value.trim();
-    if (!key) { alert("请输入 Access Key"); return; }
-    localStorage.setItem(CFG_KEY, key);
-    alert("✅ 提交通道已配置：用户提交将发送到你的邮箱");
+    alert("✅ 提交收件邮箱已固定为：" + ADMIN_EMAIL + "\n用户提交的软件会直接发送到该邮箱");
   });
 
   $("changePwd").addEventListener("click", async () => {
