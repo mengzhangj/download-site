@@ -9,17 +9,16 @@
 </head>
 <body>
 
-<!-- 背景光效 -->
-<div class="bg-aurora" aria-hidden="true">
+<!-- 动态背景 -->
+<div class="bg" aria-hidden="true">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
-  <div class="grid-overlay"></div>
 </div>
 
 <!-- 顶部导航 -->
 <header class="nav">
-  <div class="nav-inner">
+  <div class="nav-inner glass">
     <a class="brand" href="#">
       <span class="brand-logo">🛡️</span>
       <span class="brand-text">精选软件站</span>
@@ -27,15 +26,16 @@
     <div class="nav-actions">
       <span id="navCount" class="nav-count"></span>
       <button id="themeBtn" class="icon-btn" title="切换主题">🌙</button>
+      <button id="submitBtn" class="btn-submit">📤 提交软件</button>
     </div>
   </div>
 </header>
 
 <!-- Hero 区 -->
 <section class="hero">
-  <div class="hero-badge">✅ 全部软件安全检测 · 持续更新</div>
+  <div class="hero-badge glass">✅ 人工审核上架 · 纯净无捆绑</div>
   <h1 class="hero-title">值得信赖的<span class="grad">软件下载站</span></h1>
-  <p class="hero-sub">精选实用软件 · 纯净无捆绑 · 一键安装</p>
+  <p class="hero-sub">精选实用软件 · 一键下载 · 欢迎提交你发现的宝藏软件</p>
   <div class="search-box">
     <span class="search-icon">🔍</span>
     <input id="searchInput" type="text" placeholder="搜索软件名称 / 功能…" autocomplete="off">
@@ -65,9 +65,109 @@
 
 <!-- 页脚 -->
 <footer class="footer">
-  <p>🛡️ 本网站收录的软件均经人工筛选，请放心下载</p>
-  <p class="footer-sub">如遇问题或需要添加软件，请联系维护者</p>
+  <p>🛡️ 本站收录软件均经人工审核，请放心下载</p>
+  <p class="footer-sub">发现好软件？点右上角「提交软件」推荐给大家</p>
+  <a class="admin-link" href="#" id="adminLink">⚙️ 管理</a>
 </footer>
+
+<!-- ===== 提交软件弹窗 ===== -->
+<div class="overlay" id="submitOverlay">
+  <div class="modal glass">
+    <button class="modal-close" data-close="submitOverlay">✕</button>
+    <h2 class="modal-title">📤 提交软件</h2>
+    <p class="modal-sub">填写下方信息提交推荐。管理员审核通过后，软件将上架到本站，所有人即可下载。</p>
+    <form id="submitForm">
+      <div class="form-field">
+        <label>软件名称 *</label>
+        <input type="text" name="软件名称" required maxlength="40" placeholder="例如：图吧工具箱">
+      </div>
+      <div class="form-field">
+        <label>软件简介 *</label>
+        <textarea name="软件简介" required maxlength="200" placeholder="一句话介绍这个软件是干什么的"></textarea>
+      </div>
+      <div class="form-field">
+        <label>分类</label>
+        <select name="分类">
+          <option>系统工具</option>
+          <option>游戏工具</option>
+          <option>设计工具</option>
+          <option>网络工具</option>
+          <option>其他</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>版本号</label>
+        <input type="text" name="版本号" maxlength="20" placeholder="如 1.0.0（选填）">
+      </div>
+      <div class="form-field">
+        <label>下载链接</label>
+        <input type="url" name="下载链接" placeholder="https://… 网盘/官网直链（选填）">
+        <div class="form-hint">小于 20MB 的安装包可直接在下方上传；大文件请填网盘链接</div>
+      </div>
+      <div class="form-field">
+        <label>安装包文件（≤20MB）</label>
+        <input type="file" name="安装包附件" accept=".exe,.msi,.apk,.zip,.7z">
+      </div>
+      <div class="form-field">
+        <label>联系方式</label>
+        <input type="text" name="联系方式" maxlength="60" placeholder="微信 / 邮箱（选填，方便通知审核结果）">
+      </div>
+      <button type="submit" class="btn-primary">提交审核</button>
+      <div class="form-msg" id="submitMsg"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== 管理面板弹窗 ===== -->
+<div class="overlay" id="adminOverlay">
+  <div class="modal glass">
+    <button class="modal-close" data-close="adminOverlay">✕</button>
+    <h2 class="modal-title">⚙️ 管理面板</h2>
+
+    <!-- 登录 -->
+    <div class="login-box" id="adminLogin">
+      <p class="modal-sub">请输入管理员密码</p>
+      <input type="password" id="adminPwd" placeholder="管理员密码">
+      <button class="btn-primary" id="adminLoginBtn" style="max-width:260px;margin:0 auto;display:block">进入管理</button>
+      <div class="form-msg err" id="loginMsg"></div>
+    </div>
+
+    <!-- 管理内容 -->
+    <div id="adminContent" hidden>
+      <div class="admin-section">
+        <h4>📬 提交收件配置</h4>
+        <div class="admin-row">
+          <input type="text" id="cfgKey" placeholder="Web3Forms Access Key">
+          <button class="admin-btn" id="saveCfg">保存</button>
+        </div>
+        <p class="admin-tip">
+          提交的软件会发送到你的邮箱。配置方法（2 分钟）：<br>
+          ① 打开 <code>web3forms.com</code> → 输入你的邮箱 → 点 Generate<br>
+          ② 把生成的 Access Key 粘贴到上面保存<br>
+          ③ 以后用户提交的软件会发到该邮箱，你审核后运行上传工具上架
+        </p>
+      </div>
+      <div class="admin-section">
+        <h4>📦 上架新软件（电脑端操作）</h4>
+        <p class="admin-tip">
+          在电脑上运行上传工具：<br>
+          <code>D:\ai\gongzhuo\download-site\upload.ps1</code><br>
+          ① 双击运行 → 拖入安装包文件 → 填名称/简介/分类<br>
+          ② 自动上传并上架，刷新网站即生效<br>
+          <br>
+          审核通过的提交，把安装包下载到电脑 → 运行上传工具即可。
+        </p>
+      </div>
+      <div class="admin-section">
+        <h4>🔑 修改密码</h4>
+        <div class="admin-row">
+          <input type="password" id="newPwd" placeholder="新密码">
+          <button class="admin-btn" id="changePwd">修改</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="app.js"></script>
 </body>
