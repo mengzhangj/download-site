@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>精选软件站 · 安全下载</title>
+<meta name="description" content="精选安全软件，一键下载，持续更新">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 背景光效 -->
+<div class="bg-aurora" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<!-- 顶部导航 -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <span class="brand-logo">🛡️</span>
+      <span class="brand-text">精选软件站</span>
+    </a>
+    <div class="nav-actions">
+      <span id="navCount" class="nav-count"></span>
+      <button id="themeBtn" class="icon-btn" title="切换主题">🌙</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero 区 -->
+<section class="hero">
+  <div class="hero-badge">✅ 全部软件安全检测 · 持续更新</div>
+  <h1 class="hero-title">值得信赖的<span class="grad">软件下载站</span></h1>
+  <p class="hero-sub">精选实用软件 · 纯净无捆绑 · 一键安装</p>
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input id="searchInput" type="text" placeholder="搜索软件名称 / 功能…" autocomplete="off">
+    <button id="searchClear" class="search-clear" hidden>✕</button>
+  </div>
+</section>
+
+<!-- 分类过滤 -->
+<div class="filter-bar" id="filterBar">
+  <button class="chip active" data-cat="all">全部</button>
+</div>
+
+<!-- 软件列表 -->
+<main class="grid" id="grid"></main>
+
+<!-- 加载状态 -->
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+  <p>正在加载软件列表…</p>
+</div>
+
+<!-- 空状态 -->
+<div class="empty" id="empty" hidden>
+  <div class="empty-icon">🕳️</div>
+  <p>没有找到匹配的软件</p>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <p>🛡️ 本网站收录的软件均经人工筛选，请放心下载</p>
+  <p class="footer-sub">如遇问题或需要添加软件，请联系维护者</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
