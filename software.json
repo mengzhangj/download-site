@@ -1,0 +1,43 @@
+{
+  "software": [
+    {
+      "id": "pcl2",
+      "name": "Plain Craft Launcher 2 (PCL2)",
+      "desc": "我的世界启动器，界面简洁、启动快，支持 Java 多版本与 Mod 管理，广受玩家好评。",
+      "icon": "⛏️",
+      "version": "2",
+      "size": "5.5 MB",
+      "os": "Windows",
+      "file": "uploads/Plain Craft Launcher 2.exe",
+      "category": "游戏工具",
+      "tags": ["我的世界", "Minecraft", "启动器", "PCL2"],
+      "note": ""
+    },
+    {
+      "id": "tubatoolbox",
+      "name": "图吧工具箱",
+      "desc": "硬件检测与维修一站式工具箱，集成 CPU/显卡/硬盘/内存检测、烤机、跑分等实用工具。",
+      "icon": "🛠️",
+      "version": "-",
+      "size": "-",
+      "os": "Windows",
+      "file": "",
+      "category": "系统工具",
+      "tags": ["硬件检测", "烤机", "跑分", "工具箱"],
+      "note": "安装包待上传，拿到文件后即可上架"
+    },
+    {
+      "id": "photoshop",
+      "name": "Adobe Photoshop (PS)",
+      "desc": "全球最流行的图像处理与设计软件，修图、合成、绘画一应俱全。",
+      "icon": "🎨",
+      "version": "-",
+      "size": "-",
+      "os": "Windows",
+      "file": "",
+      "category": "设计工具",
+      "tags": ["PS", "修图", "图像处理", "设计"],
+      "note": "安装包待上传，拿到文件后即可上架"
+    }
+  ]
+}
